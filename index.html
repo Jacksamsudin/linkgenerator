@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MaiTeka - Link Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+    --cream:#FAF6EF;
+    --cream-deep:#F1E9DA;
+    --emerald:#1B4B43;
+    --emerald-deep:#123832;
+    --gold:#C6A15B;
+    --gold-soft:#E7D5A9;
+    --charcoal:#2E2B28;
+    --muted:#8A8377;
+    --rose:#B9767A;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    font-family:'Poppins', sans-serif;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(198,161,91,0.10), transparent 40%),
+        radial-gradient(circle at 85% 90%, rgba(27,75,67,0.08), transparent 45%),
+        var(--cream);
+    color:var(--charcoal);
+    padding:50px 20px;
+    min-height:100vh;
+}
+.container{
+    max-width:920px;
+    margin:auto;
+    background:#FFFDF9;
+    padding:48px 44px;
+    border-radius:18px;
+    border:1px solid var(--gold-soft);
+    box-shadow:0 25px 60px -20px rgba(27,75,67,0.25), 0 2px 8px rgba(0,0,0,0.04);
+    position:relative;
+    overflow:hidden;
+}
+.container::before,
+.container::after{
+    content:"";
+    position:absolute;
+    width:70px;
+    height:70px;
+    border:2px solid var(--gold);
+    opacity:.55;
+}
+.container::before{
+    top:14px;
+    left:14px;
+    border-right:none;
+    border-bottom:none;
+    border-top-left-radius:14px;
+}
+.container::after{
+    bottom:14px;
+    right:14px;
+    border-left:none;
+    border-top:none;
+    border-bottom-right-radius:14px;
+}
+.eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.28em;
+    font-size:11px;
+    color:var(--gold);
+    font-weight:600;
+    text-align:center;
+    margin-bottom:10px;
+}
+h1{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size:34px;
+    color:var(--emerald-deep);
+    text-align:center;
+    letter-spacing:.01em;
+}
+.divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin:16px 0 22px;
+}
+.divider .line{
+    width:60px;
+    height:1px;
+    background:linear-gradient(to var(--dir,right), transparent, var(--gold));
+}
+.divider .line.left{ background:linear-gradient(to left, transparent, var(--gold)); }
+.divider .diamond{
+    width:7px;
+    height:7px;
+    background:var(--gold);
+    transform:rotate(45deg);
+}
+p.sub{
+    color:var(--muted);
+    text-align:center;
+    font-size:14.5px;
+    max-width:520px;
+    margin:0 auto 30px;
+    line-height:1.6;
+}
+label{
+    display:block;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.05em;
+    color:var(--emerald);
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+input, textarea{
+    width:100%;
+    padding:14px 16px;
+    border-radius:10px;
+    border:1.5px solid #E5DDC9;
+    background:var(--cream);
+    font-family:'Poppins', sans-serif;
+    font-size:14.5px;
+    color:var(--charcoal);
+    margin-bottom:22px;
+    transition:border-color .2s, box-shadow .2s;
+}
+input:focus, textarea:focus{
+    outline:none;
+    border-color:var(--gold);
+    box-shadow:0 0 0 4px rgba(198,161,91,0.15);
+    background:#fff;
+}
+textarea{
+    height:170px;
+    resize:vertical;
+    line-height:1.7;
+}
+::placeholder{
+    color:#B7AF9E;
+}
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:8px;
+}
+button{
+    padding:13px 24px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-family:'Poppins', sans-serif;
+    font-size:14px;
+    font-weight:500;
+    letter-spacing:.02em;
+    transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+button:active{
+    transform:translateY(1px);
+}
+.btn-primary{
+    background:linear-gradient(135deg, var(--emerald), var(--emerald-deep));
+    color:#FBF3DE;
+    box-shadow:0 8px 20px -6px rgba(27,75,67,0.55);
+}
+.btn-primary:hover{
+    box-shadow:0 10px 24px -6px rgba(27,75,67,0.65);
+}
+.btn-gold{
+    background:linear-gradient(135deg, var(--gold), #B78E45);
+    color:#3B2E0F;
+    box-shadow:0 8px 20px -6px rgba(198,161,91,0.55);
+}
+.btn-gold:hover{
+    box-shadow:0 10px 24px -6px rgba(198,161,91,0.65);
+}
+.btn-outline{
+    background:#fff;
+    color:var(--emerald-deep);
+    border:1.5px solid var(--emerald);
+}
+.btn-outline:hover{
+    background:var(--emerald-deep);
+    color:#FBF3DE;
+}
+table{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    margin-top:32px;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 18px rgba(0,0,0,0.05);
+}
+thead tr{
+    background:linear-gradient(135deg, var(--emerald), var(--emerald-deep));
+}
+th{
+    color:#F6EBCE;
+    padding:14px 12px;
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    font-weight:600;
+    text-align:left;
+}
+td{
+    padding:13px 12px;
+    font-size:14px;
+    border-bottom:1px solid #EFE8D8;
+    background:#fff;
+}
+tbody tr:nth-child(even) td{
+    background:var(--cream);
+}
+tbody tr:hover td{
+    background:var(--gold-soft);
+}
+.resultLink{
+    word-break:break-all;
+    color:var(--rose);
+    font-weight:500;
+}
+.copyBtn{
+    background:var(--emerald);
+    color:#fff;
+    padding:8px 16px;
+    font-size:12.5px;
+    border-radius:8px;
+}
+.copyBtn:hover{
+    background:var(--emerald-deep);
+}
+.empty-hint{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    padding:18px 0 4px;
+}
+@media(max-width:768px){
+    .container{
+        padding:32px 22px;
+    }
+    h1{ font-size:26px; }
+    table{ font-size:12px; }
+    td, th{ padding:9px 8px; }
+    .actions{ flex-direction:column; }
+    button{ width:100%; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<p class="eyebrow">MaiTeka</p>
+<h1>Link Generator Undangan</h1>
+<div class="divider">
+    <span class="line left"></span>
+    <span class="diamond"></span>
+    <span class="line"></span>
+</div>
+<p class="sub">Masukkan URL undangan dan daftar nama tamu (1 baris = 1 tamu), lalu buat tautan personal untuk setiap tamu secara instan.</p>
+
+<label for="baseUrl">URL Website</label>
+<input
+id="baseUrl"
+value="https://username.github.io/undangan/"
+placeholder="URL Website">
+
+<label for="names">Daftar Nama Tamu</label>
+<textarea
+id="names"
+placeholder="Contoh:
+Budi Santoso
+Made Arya
+Ni Putu Sari
+I Ketut Agus"></textarea>
+
+<div class="actions">
+<button class="btn-primary" onclick="generateLinks()">Generate</button>
+<button class="btn-gold" onclick="copyAll()">Copy Semua</button>
+<button class="btn-outline" onclick="downloadCSV()">Download CSV</button>
+</div>
+
+<table id="resultTable">
+<thead>
+<tr>
+<th>No</th>
+<th>Nama</th>
+<th>Link</th>
+<th>Aksi</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</div>
+<script>
+let generatedData=[];
+function generateLinks(){
+const tbody=document.querySelector("tbody");
+tbody.innerHTML="";
+generatedData=[];
+const base=document.getElementById("baseUrl").value.trim();
+const names=document.getElementById("names")
+.value
+.split("\n")
+.map(x=>x.trim())
+.filter(x=>x!="");
+if(names.length===0){
+tbody.innerHTML=`<tr><td colspan="4" class="empty-hint">Belum ada nama tamu dimasukkan.</td></tr>`;
+return;
+}
+names.forEach((nama,index)=>{
+const link=
+base+
+"?to="+
+encodeURIComponent(nama);
+generatedData.push({
+nama,
+link
+});
+tbody.innerHTML+=`
+<tr>
+<td>${index+1}</td>
+<td>${nama}</td>
+<td class="resultLink">
+${link}
+</td>
+<td>
+<button
+class="copyBtn"
+onclick="copyLink('${link}')">
+Copy
+</button>
+</td>
+</tr>
+`;
+});
+}
+function copyLink(link){
+navigator.clipboard.writeText(link);
+alert("Link berhasil disalin!");
+}
+function copyAll(){
+if(generatedData.length==0){
+alert("Belum ada data.");
+return;
+}
+let text="";
+generatedData.forEach(item=>{
+text+=item.nama+" : "+item.link+"\n";
+});
+navigator.clipboard.writeText(text);
+alert("Semua link berhasil disalin!");
+}
+function downloadCSV(){
+if(generatedData.length==0){
+alert("Belum ada data.");
+return;
+}
+let csv="Nama,Link\n";
+generatedData.forEach(item=>{
+csv+=`"${item.nama}","${item.link}"\n`;
+});
+const blob=new Blob([csv],{type:'text/csv'});
+const a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="Undangan.csv";
+a.click();
+}
+</script>
+</body>
+</html>
